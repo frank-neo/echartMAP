@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/echarts.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/china.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/world.js" charset="utf-8"></script>
+  <title>Document</title>
+ </head>
+ <body>
+  <div id="china-map" style="width: 55%;height:70vh;float:left;display:inline;"></div><div id="main" style="width: 45%;height:70vh;float:left;display:inline;"></div>
+  <script>
+    var myChart = echarts.init(document.getElementById('china-map'));
+    var option = {
+        title : {
+            text: '国内订单量',
+            subtext: '纯属虚构',
+            x:'center'
+        },
+        tooltip : {//提示框组件。
+            trigger: 'item'//数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+        },
+        legend: {
+            orient: 'horizontal',//图例的排列方向
+            x:'left',//图例的位置
+            data:['订单量']
+        },
+
+        visualMap: {//颜色的设置  dataRange
+            x: 'left',
+            y: 'center',
+            splitList: [
+                {start: 1500,},
+                {start: 900, end: 1500},
+                {start: 310, end: 1000},
+                {start: 200, end: 300},
+                {start: 10, end: 200, label: '10 到 200（自定义label）'},
+                //{start: 5, end: 5, label: '5（自定义特殊颜色）', color: 'black'},
+                {end: 10,color: 'blue'}
+            ],
+//            min: 0,
+//            max: 2500,
+//            calculable : true,//颜色呈条状
+            text:['高','低'],// 文本，默认为数值文本
+            color: ['#E0022B', '#E09107', '#A3E00B']
+        },
+        toolbox: {//工具栏
+            show: false,
+            orient : 'vertical',//工具栏 icon 的布局朝向
+            x: 'right',
+            y: 'center',
+            feature : {//各工具配置项。
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},//数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+                restore : {show: true},//配置项还原。
+                saveAsImage : {show: true}//保存为图片。
+            }
+        },
+        roamController: {//控制地图的上下左右放大缩小 图上没有显示
+            show: true,
+            x: 'right',
+            mapTypeControl: {
+                'china': true
+            }
+        },
+        series : [
+            {
+                name: '订单量',
+                type: 'map',
+                mapType: 'china',
+                roam: false,//是否开启鼠标缩放和平移漫游
+                itemStyle:{//地图区域的多边形 图形样式
+                    normal:{//是图形在默认状态下的样式
+                        label:{
+                            show:true,//是否显示标签
+                            textStyle: {
+                                color: "rgb(249, 249, 249)"
+                            }
+                        }
+                    },
+                    emphasis:{//是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                        label:{show:true}
+                    }
+                },
+                top:"3%",//组件距离容器的距离
+                data:[
+                    {name: '北京',value: Math.round(Math.random()*2000)},
+                    {name: '天津',value: Math.round(Math.random()*2000)},
+                    {name: '上海',value: Math.round(Math.random()*2000)},
+                    {name: '重庆',value: Math.round(Math.random()*2000)},
+                    {name: '河北',value: 0},
+                    {name: '河南',value: Math.round(Math.random()*2000)},
+                    {name: '云南',value: 5},
+                    {name: '辽宁',value: 305},
+                    {name: '黑龙江',value: Math.round(Math.random()*2000)},
+                    {name: '湖南',value: 200},
+                    {name: '安徽',value: Math.round(Math.random()*2000)},
+                    {name: '山东',value: Math.round(Math.random()*2000)},
+                    {name: '新疆',value: Math.round(Math.random()*2000)},
+                    {name: '江苏',value: Math.round(Math.random()*2000)},
+                    {name: '浙江',value: Math.round(Math.random()*2000)},
+                    {name: '江西',value: Math.round(Math.random()*2000)},
+                    {name: '湖北',value: Math.round(Math.random()*2000)},
+                    {name: '广西',value: Math.round(Math.random()*2000)},
+                    {name: '甘肃',value: Math.round(Math.random()*2000)},
+                    {name: '山西',value: Math.round(Math.random()*2000)},
+                    {name: '内蒙古',value: Math.round(Math.random()*2000)},
+                    {name: '陕西',value: Math.round(Math.random()*2000)},
+                    {name: '吉林',value: Math.round(Math.random()*2000)},
+                    {name: '福建',value: Math.round(Math.random()*2000)},
+                    {name: '贵州',value: Math.round(Math.random()*2000)},
+                    {name: '广东',value: Math.round(Math.random()*2000)},
+                    {name: '青海',value: Math.round(Math.random()*2000)},
+                    {name: '西藏',value: Math.round(Math.random()*2000)},
+                    {name: '四川',value: Math.round(Math.random()*2000)},
+                    {name: '宁夏',value: Math.round(Math.random()*2000)},
+                    {name: '海南',value: Math.round(Math.random()*2000)},
+                    {name: '台湾',value: Math.round(Math.random()*2000)},
+                    {name: '香港',value: Math.round(Math.random()*2000)},
+                    {name: '澳门',value: Math.round(Math.random()*2000)}
+                ]
+            }
+        ]
+    };
+    myChart.setOption(option);
+    myChart.on('mouseover', function (params) {
+        var dataIndex = params.dataIndex;
+        console.log(params);
+    });
+	
+	//世界地图-------------------------------------------------------------------------------------------------------------------------------------
+	// 获取echarts的容器
+	var chart = echarts.init(document.getElementById("main"));
+
+	/*
+		图中相关城市经纬度,根据你的需求添加数据
+		关于国家的经纬度，可以用首都的经纬度或者其他城市的经纬度
+	*/
+	var geoCoordMap = {
+		'南宁': [108.479, 23.1152],
+		'广州': [113.5107, 23.2196],
+		'重庆': [107.7539, 30.1904],
+		'芬兰': [24.909912, 60.169095], 
+		'美国': [-100.696295, 33.679979], 
+		'日本': [139.710164, 35.706962], 
+		'韩国': [126.979208, 37.53875], 
+		'瑞士': [7.445147, 46.956241],
+		'东南亚': [117.53244, 5.300343], 
+		'澳大利亚': [135.193845, -25.304039], 
+		'德国': [13.402393, 52.518569], 
+		'英国': [-0.126608, 51.208425], 
+		'加拿大': [-102.646409, 59.994255]
+	};
+
+/* 
+    记录下起点城市和终点城市的名称，以及权重
+    数组第一位为终点城市，数组第二位为起点城市，以及该城市的权重，就是图上圆圈的大小
+ */
+
+// 重庆
+var CQData = [
+    [{name: '重庆'}, {name: "芬兰",value: 30}],
+    [{name: '重庆'}, {name: "德国",value: 90}],
+    [{name: '重庆'}, {name: "英国",value: 30}],
+    [{name: '重庆'}, {name: "韩国",value: 30}]
+];
+
+// 广州
+var GZData = [
+    [{name: '广州'}, {name: "日本",value: 30}],
+    [{name: '广州'}, {name: "东南亚",value: 30}]
+];
+
+// 南宁
+var NNData = [
+    [{name: '南宁'}, {name: "加拿大",value: 30}],
+    [{name: '南宁'}, {name: "美国",value: 100}],
+    [{name: '南宁'}, {name: "澳大利亚",value: 95}],
+    [{name: '南宁'}, {name: "瑞士",value: 30}]
+];
+
+// 小飞机的图标，可以用其他图形替换
+//var planePath = 'path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z';
+
+// 获取地图中起点和终点的坐标，以数组形式保存下来
+var convertData = function(data) {
+    var res = []; 
+    for(var i = 0; i < data.length; i++) {
+        var dataItem = data[i];
+        var fromCoord = geoCoordMap[dataItem[1].name];
+        var toCoord = geoCoordMap[dataItem[0].name];
+        if(fromCoord && toCoord) {
+            res.push([{
+                coord: fromCoord // 起点坐标
+            }, {
+                coord: toCoord // 终点坐标
+            }])
+        }
+    }
+    return res;
+}
+
+var color  = ['#990033', '#990033'];    // 自定义图中要用到的颜色
+var series = [];                        // 用来存储地图数据
+
+/*
+    图中一共用到三种效果，分别为航线特效图、飞机航线图以及城市图标涟漪图。
+    要用到setOption中的series属性，并且对每个城市都要进行三次设置。
+*/
+[['重庆', CQData],['广州', GZData],['南宁', NNData]].forEach(function(item, i) {
+    series.push({ // 散点效果
+        type: 'effectScatter',         
+        coordinateSystem: 'geo',       // 表示使用的坐标系为地理坐标系
+        zlevel: 3,
+        rippleEffect: {
+            brushType: 'stroke'        // 波纹绘制效果
+        },
+        label: {
+            normal: {                  // 默认的文本标签显示样式
+                show: true,
+                position: 'left',      // 标签显示的位置
+                formatter: '{b}'       // 标签内容格式器
+            }
+        },
+        itemStyle: {
+            normal: {
+                color: color[0]
+            }
+        },
+        data: item[1].map(function(dataItem) {
+            return {
+                name: dataItem[1].name,
+                value: geoCoordMap[dataItem[1].name],  // 起点的位置
+                symbolSize: dataItem[1].value / 8,  // 散点的大小，通过之前设置的权重来计算，val的值来自data返回的value
+            };
+        })
+    });
+});
+
+
+// 最后初始化世界地图中的相关数据
+chart.setOption({
+    title: {
+		text: '境外订单量',
+		subtext: '纯属虚构',
+        textStyle: {
+            color: '#330000',
+            fontSize: 20
+			
+        },
+		x:'center'
+        //top: '10px',
+        //left: '10px'
+    },
+    geo: {
+        map: 'world',       // 与引用进来的地图js名字一致
+        roam: false,        // 禁止缩放平移
+        itemStyle: {        // 每个区域的样式 
+            normal: {
+                areaColor: '#323c48'
+            },
+            emphasis: {
+                areaColor: '#2a333d'
+            }
+        },
+        regions: [{        // 选中的区域
+            name: 'China',
+            selected: true,
+            itemStyle: {   // 高亮时候的样式
+                emphasis: {
+                    areaColor: '#7d7d7d'
+                }
+            },
+            label: {    // 高亮的时候不显示标签
+                emphasis: {
+                    show: false
+                }
+            }
+        }]
+    },
+    series: series,   // 将之前处理的数据放到这里
+    textStyle: {
+        fontSize: 12
+    }
+});
+
+
+</script>
+ </body>
+</html>
